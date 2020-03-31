@@ -10,8 +10,6 @@ import {
 } from 'react-icons/md'
 
 import {connect} from 'react-redux'
-import store from '../redux/store'
-import {persistStore} from 'redux-persist'
 import {getTask,addTask,checkTask,editTask,deleteTask} from '../redux/actions/Todo'
 
 import {
@@ -59,11 +57,6 @@ class Todo extends Component {
       this.props.deleteTask(task)
       this.setState({showModal:false, deleteTask:0})
     }
-  }
-  componentWillMount(){
-    persistStore(store().store,{},()=>{
-      this.setState({rehydrated: true})
-    })
   }
   render() {
     const {task} = this.props.todo
