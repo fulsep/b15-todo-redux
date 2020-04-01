@@ -14,7 +14,8 @@ import {getTask,addTask,checkTask,editTask,deleteTask} from '../redux/actions/To
 
 import {
   Header, Input, Card,
-  Body, Action, CenteredAlert
+  Body, Action, CenteredAlert,
+  Toolbar
 } from '../components/Core'
 
 class Todo extends Component {
@@ -23,6 +24,7 @@ class Todo extends Component {
     this.state = {
       input: '',
       inputEdit: '',
+      edit: false,
       editTask: 0,
       deleteTask: 0,
       showModal: false
@@ -77,7 +79,12 @@ class Todo extends Component {
             <Row>
               <Col md={12}>
                 {task.length!==0 &&(
-                  <h5>Total Tasks ({task.length})</h5>
+                  <Toolbar>
+                    <h5>Total Tasks ({task.length})</h5>
+                    <div>
+                      <Button onClick={()=>this.setState({edit: !this.state.edit})} size='sm' color='danger'>Toggle Options</Button>
+                    </div>
+                  </Toolbar>
                 )}
               </Col>
               {task.length!==0 && task.map((v,i) =>(
@@ -97,12 +104,16 @@ class Todo extends Component {
                           <MdCheckCircle size={25} />
                         </span>
                       )}
-                      <span onClick={()=>this.editTask(i)}>
-                        <MdEdit color='#F97A24' size={25} />
-                      </span>
-                      <span onClick={()=>this.deleteTask(i)}>
-                        <MdDeleteForever color='#DD5246' size={25} />
-                      </span>
+                      {this.state.edit &&(
+                        <>
+                          <span onClick={()=>this.editTask(i)}>
+                            <MdEdit color='#F97A24' size={25} />
+                          </span>
+                          <span onClick={()=>this.deleteTask(i)}>
+                            <MdDeleteForever color='#DD5246' size={25} />
+                          </span>
+                        </>
+                      )}
                     </Action>
                   </Card>
                 </Col>

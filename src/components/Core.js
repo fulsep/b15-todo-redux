@@ -45,9 +45,9 @@ export const Body = styled('div')`
 
 export const Action = styled('span')`
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  min-width: 80px;
 
 `
 export const CenteredAlert = styled('div')`
@@ -59,4 +59,11 @@ export const CenteredAlert = styled('div')`
   font-size:30px;
   font-weight: bold;
   color: #fff;
+`
+
+export const Toolbar = styled('div')`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `
