@@ -1,6 +1,6 @@
 export function getTask(){
-  return {
-    type: ''
+  return function(dispatch){
+    dispatch({type:''})
   }
 }
 export function checkTask(payload){

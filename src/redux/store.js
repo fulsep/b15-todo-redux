@@ -3,7 +3,9 @@ import promiseMiddleware from 'redux-promise-middleware'
 import logger from 'redux-logger'
 import storage from 'redux-persist/lib/storage'
 import {persistStore, persistReducer} from 'redux-persist'
+import thunk from 'redux-thunk'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+import {composeWithDevTools} from 'redux-devtools-extension'
 import reducer from './reducer'
 
 const config = {
@@ -18,10 +20,11 @@ const persistedReducer = persistReducer(config,reducer)
 export default function(){
   const store = createStore(
     persistedReducer,
-    applyMiddleware(
+    composeWithDevTools(applyMiddleware(
       promiseMiddleware,
       logger,
-    )
+      thunk
+    ))
   )
   const persistor = persistStore(store)
   return {store, persistor}
